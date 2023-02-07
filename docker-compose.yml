@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  postgres:
+        image: postgres
+        container_name: postgres
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: sheersh
+            POSTGRES_DB: sheersh
+            POSTGRES_PASSWORD: sheersh
+        volumes:
+            - ./data/postgres_dumps:/var/lib/postgresql/data/
+
+  pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4
+        depends_on:
+          - postgres
+        restart: always
+        environment:
+          PGADMIN_DEFAULT_EMAIL: sheersh@gkmit.co
+          PGADMIN_DEFAULT_PASSWORD: sheersh
+        ports:
+          - "5050:80"
